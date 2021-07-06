@@ -1,0 +1,10 @@
+
+<div appStyle>
+  <img [src]="room.img" alt="image" #imageRef>
+  <p>{{ room.id }}</p>
+  <p>{{ room.name }}</p>
+  <p>{{room.description}}</p>
+  <button (click)="selectHotel(room.id)">Кнопка</button>
+  <ng-content></ng-content>
+</div>
+

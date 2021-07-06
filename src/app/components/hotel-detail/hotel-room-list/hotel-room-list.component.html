@@ -1,0 +1,5 @@
+<p>hotel-room-list works!</p>
+
+<div *ngFor="let room of rooms">
+  <app-hotel-room-item (onSelect)="selectRoom($event)" [room]="room"><b>children</b></app-hotel-room-item>
+</div>

@@ -1,0 +1,34 @@
+<div>
+  <h1>Детально про готель #{{ product_id }}</h1>
+
+  <p>two way data binding example</p>
+  <input [(ngModel)]="description"/>
+  <br>
+  <p>directives ng class and ng style</p>
+  <p [ngStyle]="{color:'red'}" [ngClass]="{empty: !description}">{{description}}</p>
+  <br>
+
+  <p>directives ng for</p>
+  <ul>
+    <li *ngFor="let item of items; let i = index">
+      <span>{{i}}</span> {{item.name}}
+    </li>
+  </ul>
+  <br>
+
+
+  <p>if, else</p>
+  <div *ngIf="description; else desc"> this block is shown only when description is not empty</div>
+  <ng-template #desc> if empty </ng-template>
+
+  <p>ng switch</p>
+  <div [ngSwitch]="!!description">
+    <p *ngSwitchCase="true">Lorem ipsum.</p>
+    <p *ngSwitchCase="false">Lorem ipsum.lorem3 Lorem ipsum dolor.</p>
+  </div>
+  <br>
+
+  <p>work with date</p>
+  <p>{{dateShow | date: 'yyyy.MM.dd'}}</p>
+</div>
+
