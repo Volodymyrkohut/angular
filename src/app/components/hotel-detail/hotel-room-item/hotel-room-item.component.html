@@ -1,10 +1,19 @@
 
-<div appStyle>
+<div>
   <img [src]="room.img" alt="image" #imageRef>
   <p>{{ room.id }}</p>
-  <p>{{ room.name }}</p>
+  <p [appStyle]="'red'" fontWeight="700">{{ room.name }}</p>
   <p>{{room.description}}</p>
-  <button (click)="selectHotel(room.id)">Кнопка</button>
+  <button (click)="selectHotel(room.id); isVisible = !isVisible">Кнопка</button>
+    {{ isVisible }}
+  <div *appIfnot="!isVisible">text </div>
+
   <ng-content></ng-content>
+  <pre>
+    {{text}}
+  </pre>
+  <textarea [(ngModel)]="text"></textarea>
+
+  <div >{{ 3 | multy:2 }}</div>
 </div>
 

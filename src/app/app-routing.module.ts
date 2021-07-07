@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HotelDetailComponent} from "./hotel-detail/hotel-detail.component";
-import {HotelsComponent} from "./hotels/hotels.component";
-import {HomeComponent} from "./home/home.component";
-import {AboutComponent} from "./about/about.component";
-import {NoFoundComponent} from "./no-found/no-found.component";
-import {ProfileComponent} from "./profile/profile.component";
+import {HotelDetailComponent} from "./components/hotel-detail/hotel-detail.component";
+import {HotelsComponent} from "./components/hotels/hotels.component";
+import {HomeComponent} from "./components/home/home.component";
+import {AboutComponent} from "./components/about/about.component";
+import {NoFoundComponent} from "./components/no-found/no-found.component";
+import {ProfileComponent} from "./components/profile/profile.component";
 
 // https://www.positronx.io/angular-router-tutorial/
 const routes: Routes = [

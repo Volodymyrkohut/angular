@@ -11,6 +11,8 @@ export class HotelRoomItemComponent implements OnInit {
   @Output() onSelect: EventEmitter<number> = new EventEmitter<number>();
   @Input() room: IRoom = {name: '', description: '', id: 0, img: ''}
   @ViewChild('imageRef') imageRef: ElementRef | undefined
+  isVisible: boolean = true;
+  text: string = '';
 
   constructor() {
 
