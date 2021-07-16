@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {tap} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
+import {StorageService} from "./storage.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,18 +11,22 @@ import {tap} from "rxjs/operators";
 
 
 export class AuthService {
-  get token(): string {
-    return ''
+  AUTH_TOKEN_KEY = 'auth_token'
+
+  get token(): string | null {
+    const token: string | null = this.storageService.getItem(this.AUTH_TOKEN_KEY)
+
+    return token
   };
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private storageService: StorageService, private http: HttpClient) {}
 
 
   signIn(user: any): Observable<any> {
-    return this.http.post( 'https://api.dev24.bukovel.net/b24/desktop/auth/login-phone', user).pipe(
-      tap(this.setToken)
+    return this.http.post('https://api.dev24.bukovel.net/b24/desktop/auth/login-phone', user).pipe(
+      tap((response: any) => {
+        this.setToken(response)
+      }),
     ); //'https://api.nites.cloud/extranet/auth/login-phone', user)
   }
 
@@ -32,13 +38,12 @@ export class AuthService {
     return !!this.token
   }
 
-  private setToken(response: any) {
-    const {accessToken, tokenType} = response
-    console.log(response);
+  setToken(response: any) {
+    const {accessToken, tokenType} = response.data
+    const token = `${tokenType} ${accessToken}`;
 
-    // expiresIn - час закінчення токену
-
-    const token =  `${accessToken} ${tokenType}`;
-
+    if (accessToken) {
+      this.storageService.setItem(this.AUTH_TOKEN_KEY, token)
+    }
   }
 }

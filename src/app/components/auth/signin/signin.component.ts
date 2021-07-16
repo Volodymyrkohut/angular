@@ -8,14 +8,20 @@ import {Router} from "@angular/router";
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit{
   form: FormGroup;
 
   constructor(private auth: AuthService, private router: Router) {
     this.form = new FormGroup({
-      phone: new FormControl('', [Validators.required, Validators.pattern('[- +()0-9]+')]),
-      password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      phone: new FormControl('380502868023', [Validators.required, Validators.pattern('[- +()0-9]+')]),
+      password: new FormControl('123123123', [Validators.required, Validators.minLength(3)]),
     })
+  }
+
+  ngOnInit() {
+    if(this.auth.isAuthenticated()){
+      this.router.navigate(['profile'])
+    }
   }
 
 
