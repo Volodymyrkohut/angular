@@ -1,9 +1,11 @@
-    <app-header></app-header>
+<app-header [toggle]="toggle" (handleClick)="getFrom($event)" ></app-header>
 <mat-drawer-container class="example-container" [hasBackdrop]="false">
-  <mat-drawer  [mode]="'side'" opened>
+
+  <mat-drawer [mode]="'side'" [opened]="toggle">
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <mat-drawer-content>
+
     <mat-card class="example-card">
       <mat-card-content>
         <router-outlet></router-outlet>
@@ -15,8 +17,7 @@
     </mat-card>
 
 
-
-<!--    <ng-content></ng-content>-->
+    <!--    <ng-content></ng-content>-->
   </mat-drawer-content>
 </mat-drawer-container>
 

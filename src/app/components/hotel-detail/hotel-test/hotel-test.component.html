@@ -1,8 +1,12 @@
 <div>
   <h1>Детально про готель #{{ product_id }}</h1>
 
-  <p>two way data binding example</p>
-  <input [(ngModel)]="description"/>
+  <mat-form-field appearance="legacy">
+    <mat-label>two way data binding example</mat-label>
+    <input matInput placeholder="" [(ngModel)]="description">
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+
   <br>
   <p>directives ng class and ng style</p>
   <p [ngStyle]="{color:'red'}" [ngClass]="{empty: !description}">{{description}}</p>

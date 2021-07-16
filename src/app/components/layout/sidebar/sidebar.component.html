@@ -1,16 +1,10 @@
 <nav>
   <mat-nav-list>
-    <mat-list-item>
-      <mat-list-item><a routerLink="/profile" [routerLinkActive]="['active']">Profile</a></mat-list-item>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-list-item><a routerLink="/hotels" [routerLinkActive]="['active']">Hotels</a></mat-list-item>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-list-item><a routerLink="/hotel/1" [routerLinkActive]="['active']">Hotel 1</a></mat-list-item>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-list-item><a routerLink="/hotel/2" [routerLinkActive]="['active']">Hotel 2</a></mat-list-item>
-    </mat-list-item>
+    <a mat-list-item routerLink="/profile" [routerLinkActive]="['active']">Кабінет користувача</a>
+    <a mat-list-item routerLink="/hotels" [routerLinkActive]="['active']">Список готелів</a>
+    <a mat-list-item routerLink="/auth/signin" [routerLinkActive]="['active']">Ввійти в систему</a>
+    <a mat-list-item routerLink="/auth/signup" [routerLinkActive]="['active']">Реєстрація</a>
+    <a mat-list-item routerLink="/hotel/1" [routerLinkActive]="['active']">Готель 1</a>
+    <a mat-list-item routerLink="/hotel/2" [routerLinkActive]="['active']">Готель 2</a>
   </mat-nav-list>
 </nav>

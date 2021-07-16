@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+// import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './components/home/home.component';
@@ -9,7 +9,7 @@ import {NoFoundComponent} from './components/no-found/no-found.component';
 import {HotelsComponent} from './components/hotels/hotels.component';
 import {HotelDetailComponent} from './components/hotel-detail/hotel-detail.component';
 import {ProfileComponent} from './components/profile/profile.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HotelRoomItemComponent} from "./components/hotel-detail/hotel-room-item/hotel-room-item.component";
 import {HotelRoomListComponent} from "./components/hotel-detail/hotel-room-list/hotel-room-list.component";
 import {HotelTestComponent} from "./components/hotel-detail/hotel-test/hotel-test.component";
@@ -29,6 +29,10 @@ import {MatListModule} from "@angular/material/list";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {SharedModule} from "./shared/shared.module";
+import {SigninComponent} from "./components/auth/signin/signin.component";
 
 const MatModules = [
   MatSliderModule,
@@ -39,7 +43,9 @@ const MatModules = [
   MatListModule,
   MatMenuModule,
   MatCardModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 const LayoutModules = [
@@ -63,15 +69,17 @@ const LayoutModules = [
     StyleDirective,
     IfnotDirective,
     MultyPipe,
-
+    SigninComponent,
     ...LayoutModules,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    HttpClientModule,
+    // HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
+    SharedModule,
     ...MatModules,
   ],
   providers: [],

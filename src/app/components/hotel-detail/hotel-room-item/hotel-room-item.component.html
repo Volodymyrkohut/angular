@@ -4,7 +4,9 @@
   <p>{{ room.id }}</p>
   <p [appStyle]="'red'" fontWeight="700">{{ room.name }}</p>
   <p>{{room.description}}</p>
-  <button (click)="selectHotel(room.id); isVisible = !isVisible">Кнопка</button>
+
+  <button mat-raised-button color="primary" (click)="selectHotel(room.id); isVisible = !isVisible">Primary</button>
+
     {{ isVisible }}
   <div *appIfnot="!isVisible">text </div>
 
@@ -12,7 +14,14 @@
   <pre>
     {{text}}
   </pre>
-  <textarea [(ngModel)]="text"></textarea>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Legacy form field</mat-label>
+    <input matInput placeholder="" [(ngModel)]="text">
+<!--    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>-->
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+
 
   <div >{{ 3 | multy:2 }}</div>
 </div>

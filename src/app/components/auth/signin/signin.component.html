@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="makeLogin()">
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Enter your phone</mat-label>
+      <input matInput placeholder="380502868023" name="phone" formControlName="phone" required>
+      <mat-error *ngIf="form.get('phone')">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="example-container">
+    <mat-form-field >
+      <mat-label>Enter your password</mat-label>
+      <input matInput placeholder="********" type="password" name="password" formControlName="password" required>
+      <mat-error *ngIf="form.get('password')">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+<br/>
+  <button mat-raised-button color="primary" [disabled]="form.invalid">Ввійти в систему</button>
+</form>

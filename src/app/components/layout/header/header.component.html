@@ -9,7 +9,7 @@
     </mat-menu>
 
     <span>GIR</span> &nbsp;  &nbsp;
-    <mat-slide-toggle color="primary" checked="true"></mat-slide-toggle>
+    <mat-slide-toggle color="primary"  [ngModel]="toggle" (ngModelChange)="change($event)"></mat-slide-toggle>
 
     <span class="example-spacer"></span>
 
