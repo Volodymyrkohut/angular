@@ -25,25 +25,49 @@ export class AuthService {
   signIn(user: any): Observable<any> {
     return this.http.post('https://api.dev24.bukovel.net/b24/desktop/auth/login-phone', user).pipe(
       tap((response: any) => {
-        this.setToken(response)
+        const {accessToken, tokenType} = response.data
+        const token = `${tokenType} ${accessToken}`;
+
+        this.setToken(token)
       }),
     ); //'https://api.nites.cloud/extranet/auth/login-phone', user)
   }
 
   signOut() {
-    this.setToken(null)
+    this.setToken('')
   }
 
   isAuthenticated(): boolean {
     return !!this.token
   }
 
-  setToken(response: any) {
-    const {accessToken, tokenType} = response.data
-    const token = `${tokenType} ${accessToken}`;
-
-    if (accessToken) {
+  setToken(token: any) {
       this.storageService.setItem(this.AUTH_TOKEN_KEY, token)
-    }
+  }
+
+
+  // реєстрація
+  signUpInitial(data: any) {
+    return this.http.post('https://api.dev24.bukovel.net/b24/desktop/auth/register/initialize', data).pipe(
+      tap((response: any) => {
+          console.log("response",response);
+      }),
+    );
+  }
+
+  signUpConfirm(data: any) {
+    return this.http.post('https://api.dev24.bukovel.net/b24/desktop/auth/register/confirm-code', data).pipe(
+      tap((response: any) => {
+
+      }),
+    );
+  }
+
+  signUpComplete(data: any) {
+    return this.http.post('https://api.dev24.bukovel.net/b24/desktop/auth/register/complete', data).pipe(
+      tap((response: any) => {
+
+      }),
+    );
   }
 }

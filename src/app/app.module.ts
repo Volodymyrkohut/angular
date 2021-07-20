@@ -32,6 +32,8 @@ import { MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {SharedModule} from "./shared/shared.module";
 import {SigninComponent} from "./components/auth/signin/signin.component";
+import {SignupComponent} from "./components/auth/signup/signup.component";
+import {MatStepperModule} from "@angular/material/stepper";
 
 const MatModules = [
   MatSliderModule,
@@ -45,6 +47,7 @@ const MatModules = [
   MatSlideToggleModule,
   MatFormFieldModule,
   MatInputModule,
+  MatStepperModule,
 ];
 
 const LayoutModules = [
@@ -69,6 +72,7 @@ const LayoutModules = [
     IfnotDirective,
     MultyPipe,
     SigninComponent,
+    SignupComponent,
     ...LayoutModules,
   ],
   imports: [
