@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
+
+
 export class SignupComponent implements OnInit {
+  @ViewChild('stepper') public myStepper: MatStepper | undefined
   isLinear = true;
+  isFetching = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
   constructor(private _formBuilder: FormBuilder, private auth: AuthService) {
+
     this.firstFormGroup = this._formBuilder.group({
       phone: ['380502868023', Validators.required]
     });
@@ -32,17 +38,25 @@ export class SignupComponent implements OnInit {
   }
 
   signUpInitial() {
-    this.isLinear = true
-    console.log("data",this.firstFormGroup.get('phone')?.value)
+    // this.isLinear = true
+    this.isFetching = true
+    console.log("data", this.firstFormGroup.get('phone')?.value)
 
 
     this.auth.signUpInitial({
       phone: this.firstFormGroup.get('phone')?.value
+    }).subscribe((response: any) => {
+      this.myStepper?.next();
+      this.isFetching = false
+    }, () => {
+      this.isFetching = false
     })
-  return false
+
   }
 
   ngOnInit() {
 
   }
+
+
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Observable, Subject, throwError} from "rxjs";
+import {catchError, map, tap} from "rxjs/operators";
 import {StorageService} from "./storage.service";
 
 
@@ -11,6 +11,8 @@ import {StorageService} from "./storage.service";
 
 
 export class AuthService {
+  public error$: Subject<any> = new Subject<any>()
+
   AUTH_TOKEN_KEY = 'auth_token'
 
   get token(): string | null {
@@ -45,6 +47,15 @@ export class AuthService {
       this.storageService.setItem(this.AUTH_TOKEN_KEY, token)
   }
 
+  handleError(error: HttpErrorResponse) {
+    const {message} = error.error.error;
+
+    this.error$.next({
+      phone:'Такий телефон вже існує'
+    })
+
+    return throwError(error)
+  }
 
   // реєстрація
   signUpInitial(data: any) {
@@ -52,8 +63,13 @@ export class AuthService {
       tap((response: any) => {
           console.log("response",response);
       }),
+
+      catchError(this.handleError.bind(this))
+
     );
   }
+
+
 
   signUpConfirm(data: any) {
     return this.http.post('https://api.dev24.bukovel.net/b24/desktop/auth/register/confirm-code', data).pipe(

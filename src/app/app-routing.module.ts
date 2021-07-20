@@ -8,6 +8,7 @@ import {NoFoundComponent} from "./components/no-found/no-found.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {SigninComponent} from "./components/auth/signin/signin.component";
 import {SignupComponent} from "./components/auth/signup/signup.component";
+import {AuthGuardService} from "./services/auth-guard.service";
 
 // https://www.positronx.io/angular-router-tutorial/
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'hotels', component: HotelsComponent },
   { path: 'hotel/:id', component: HotelDetailComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuardService] },
   { path: '**', component: NoFoundComponent }
 ];
 

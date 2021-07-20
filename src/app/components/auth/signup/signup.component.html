@@ -1,23 +1,29 @@
 <!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">-->
 <!--  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}-->
 <!--</button>-->
-<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+<mat-stepper orientation="vertical" #stepper  [linear]="false">
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" (ngSubmit)="signUpInitial()" >
+    <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Вседіть свій телефон</ng-template>
       <mat-form-field>
         <mat-label>Телефон</mat-label>
         <input matInput placeholder="0502868023" formControlName="phone" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext mat-raised-button color="primary" >Продовжити</button>
+        <button
+          mat-button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="signUpInitial()"
+          [disabled]="firstFormGroup.invalid || isFetching">Продовжити</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Підтвердіть паролем з СМС</ng-template>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Код з СМС</mat-label>
         <input matInput formControlName="code" placeholder="ХХХХ"
                required>
@@ -31,32 +37,32 @@
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Заповніть дані</ng-template>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Імя</mat-label>
         <input matInput formControlName="name" placeholder="Володимир"
                required>
       </mat-form-field>
       <br/>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Прізвище</mat-label>
         <input matInput formControlName="surname" placeholder="Когут"
                required>
       </mat-form-field>
       <br/>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>e-mail</mat-label>
         <input matInput formControlName="email" placeholder="volodymyrkohut1@gmail.com"
                required>
       </mat-form-field>
       <br/>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Дата народження</mat-label>
         <input matInput formControlName="birthday" placeholder="03.07.1993"
                required>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Назад</button>
-        <button mat-button matStepperNext mat-raised-button color="primary" >Зареєструватися</button>
+        <button mat-button matStepperNext mat-raised-button color="primary">Зареєструватися</button>
       </div>
     </form>
   </mat-step>
@@ -65,7 +71,7 @@
     <p>Ви успішно зареєструвалися</p>
     <div>
       <button mat-button matStepperPrevious>Назад</button>
-<!--      <button mat-button (click)="stepper.reset()">Reset</button>-->
+      <!--      <button mat-button (click)="stepper.reset()">Reset</button>-->
     </div>
   </mat-step>
 </mat-stepper>

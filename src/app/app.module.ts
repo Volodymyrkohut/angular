@@ -33,7 +33,7 @@ import {MatInputModule} from "@angular/material/input";
 import {SharedModule} from "./shared/shared.module";
 import {SigninComponent} from "./components/auth/signin/signin.component";
 import {SignupComponent} from "./components/auth/signup/signup.component";
-import {MatStepperModule} from "@angular/material/stepper";
+import { MatStepperModule } from "@angular/material/stepper";
 
 const MatModules = [
   MatSliderModule,
@@ -74,6 +74,7 @@ const LayoutModules = [
     SigninComponent,
     SignupComponent,
     ...LayoutModules,
+
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
