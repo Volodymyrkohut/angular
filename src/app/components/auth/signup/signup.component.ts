@@ -12,7 +12,7 @@ import {MatStepper} from '@angular/material/stepper';
 
 export class SignupComponent implements OnInit {
   @ViewChild('stepper') public myStepper: MatStepper | undefined
-  isLinear = true;
+
   isFetching = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -38,10 +38,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUpInitial() {
-    // this.isLinear = true
     this.isFetching = true
-    console.log("data", this.firstFormGroup.get('phone')?.value)
-
 
     this.auth.signUpInitial({
       phone: this.firstFormGroup.get('phone')?.value

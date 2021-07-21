@@ -34,6 +34,7 @@ import {SharedModule} from "./shared/shared.module";
 import {SigninComponent} from "./components/auth/signin/signin.component";
 import {SignupComponent} from "./components/auth/signup/signup.component";
 import { MatStepperModule } from "@angular/material/stepper";
+import {SearchPipe} from "./pipes/search.pipe";
 
 const MatModules = [
   MatSliderModule,
@@ -73,12 +74,11 @@ const LayoutModules = [
     MultyPipe,
     SigninComponent,
     SignupComponent,
+    SearchPipe,
     ...LayoutModules,
-
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
-
     AppRoutingModule,
     // HttpClientModule,
     FormsModule,
@@ -90,7 +90,9 @@ const LayoutModules = [
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
+
 }
 
 // CommonModule,
