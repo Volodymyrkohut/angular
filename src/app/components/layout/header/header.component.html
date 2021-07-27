@@ -1,4 +1,6 @@
 <header>
+<!--  {{data$ | async | json }}-->
+  {{isAuth$ | async | json}}
   <mat-toolbar>
     <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
@@ -13,7 +15,7 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-button *ngIf="auth.isAuthenticated(); else authBlock" (click)="auth.signOut()" >Вийти з системи</button>
+    <button mat-button *ngIf="isAuth$ | async; else authBlock" (click)="auth.signOut()" >Вийти з системи</button>
 
     <ng-template  #authBlock>
      <button mat-button routerLink="/auth/signin">В систему</button>

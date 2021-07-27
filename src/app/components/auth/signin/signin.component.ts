@@ -1,17 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../services/auth.service";
+// import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
+import {signInRequestAction} from "../../../store/auth-store/auth.actions";
+import {Store} from "@ngrx/store";
+import {AuthService} from "../../../store/auth-store/services/auth.service";
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent implements OnInit{
+
+export class SigninComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router, private store$: Store) {
     this.form = new FormGroup({
       phone: new FormControl('380502868023', [Validators.required, Validators.pattern('[- +()0-9]+')]),
       password: new FormControl('123123123', [Validators.required, Validators.minLength(3)]),
@@ -23,7 +27,6 @@ export class SigninComponent implements OnInit{
       this.router.navigate(['profile'])
     }
   }
-
 
   getErrorMessage() {
 
@@ -60,18 +63,22 @@ export class SigninComponent implements OnInit{
       password: this.form.value.password,
     }
 
-    this.auth.signIn(user).subscribe((response) => {
-      this.form.reset();
+    this.store$.dispatch(signInRequestAction(user))
 
-      console.log("Resp",response);
-
-      // data:
-      //   accessToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLmRldjI0LmJ1a292ZWwubmV0XC9iMjRcL2Rlc2t0b3BcL2F1dGhcL2xvZ2luLXBob25lIiwiaWF0IjoxNjI2NDI4ODM1LCJleHAiOjE2NTc5NjQ4MzUsIm5iZiI6MTYyNjQyODgzNSwianRpIjoiR0wzV0Fva1ZhWmZBUWVHSiIsInN1YiI6MzgwOTIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.nh-wB4wGoXLNnng6hyyvaNnWCXch_90ZNQi_AI_44Ak"
-      // expiresIn: 31536000
-      // tokenType: "bearer"
-
-      this.router.navigate(['profile'])
-    });
+    // this.auth.signIn(user).subscribe((response) => {
+    //   this.form.reset();
+    //
+    //   this.store$.dispatch(signInSuccessAction(response))
+    //
+    //   console.log("Resp",response);
+    //
+    //   // data:
+    //   //   accessToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLmRldjI0LmJ1a292ZWwubmV0XC9iMjRcL2Rlc2t0b3BcL2F1dGhcL2xvZ2luLXBob25lIiwiaWF0IjoxNjI2NDI4ODM1LCJleHAiOjE2NTc5NjQ4MzUsIm5iZiI6MTYyNjQyODgzNSwianRpIjoiR0wzV0Fva1ZhWmZBUWVHSiIsInN1YiI6MzgwOTIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.nh-wB4wGoXLNnng6hyyvaNnWCXch_90ZNQi_AI_44Ak"
+    //   // expiresIn: 31536000
+    //   // tokenType: "bearer"
+    //
+    //   this.router.navigate(['profile'])
+    // });
 
 
     console.log("user",user);

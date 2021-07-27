@@ -8,15 +8,19 @@
       <mat-form-field>
         <mat-label>Телефон</mat-label>
         <input matInput placeholder="0502868023" formControlName="phone" required>
+        <mat-error *ngIf="firstFormGroup.get('phone')">{{getErrorMessagePhone()}}</mat-error>
       </mat-form-field>
+
+
       <div>
+        <br/>
         <button
           mat-button
           mat-raised-button
           color="primary"
           type="button"
           (click)="signUpInitial()"
-          [disabled]="firstFormGroup.invalid || isFetching">Продовжити</button>
+          [disabled]=" isFetching">Продовжити</button>
       </div>
     </form>
   </mat-step>

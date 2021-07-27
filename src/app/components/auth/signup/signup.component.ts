@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private auth: AuthService) {
 
     this.firstFormGroup = this._formBuilder.group({
-      phone: ['380502868023', Validators.required]
+      phone: ['38050286802', Validators.required]
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -38,18 +38,41 @@ export class SignupComponent implements OnInit {
   }
 
   signUpInitial() {
-    this.isFetching = true
 
+    this.isFetching = true
     this.auth.signUpInitial({
       phone: this.firstFormGroup.get('phone')?.value
     }).subscribe((response: any) => {
       this.myStepper?.next();
       this.isFetching = false
-    }, () => {
+    }, (error: any) => {
+
+      // console.log("error",error);
+
       this.isFetching = false
+
+      // @ts-ignore
+      // this.firstFormGroup.get('phone').setErrors({serverError: true})
+      this.firstFormGroup.get('phone').setErrors({serverError: 'Помилка з сервера'})
+
     })
 
   }
+
+  getErrorMessagePhone() {
+    if(this.firstFormGroup.get('phone')?.touched || this.firstFormGroup.get('phone')?.invalid){
+      if (this.firstFormGroup.get('phone')?.errors?.required) {
+        return 'Заповніть поле телефон';
+      }
+
+      if (this.firstFormGroup.get('phone')?.errors?.serverError) {
+        return this.firstFormGroup.get('phone')?.errors?.serverError
+      }
+    }
+
+    return;
+  }
+
 
   ngOnInit() {
 
