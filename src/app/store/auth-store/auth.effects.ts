@@ -17,7 +17,7 @@ export class AuthEffects {
         const token: string = `${tokenType} ${accessToken}`;
         this.authService.setToken(token)
       }),
-      map(payload => signInSuccessAction(payload)),
+      map(payload => signInSuccessAction(payload.data)),
       tap( () => this.router.navigate(['profile'])),
       catchError((error) => {
         return of(signInErrorAction(error))

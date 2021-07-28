@@ -27,8 +27,8 @@ const _authReducer = createReducer(
   on(signInRequestAction, (state) => {
     return {...state, isFetching: true};
   }),
-  on(signInSuccessAction, (state, payload) => {
-    return {...state, isFetching: false, data: payload, isAuth: true};
+  on(signInSuccessAction, (state, {type, ...rest}) => {
+    return {...state, isFetching: false, data: rest, isAuth: true};
   }),
   on(signInErrorAction, (state) => {
     return {...state, isFetching: false, isAuth: false};

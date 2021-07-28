@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
-import {authDataSelector, isAuthSelector} from "../../../store/auth-store/auth.selectors";
+import {authDataSelector, authTokenSelector, isAuthSelector} from "../../../store/auth-store/auth.selectors";
 import {AuthService} from "../../../store/auth-store/services/auth.service";
 
 @Component({
@@ -13,6 +13,8 @@ import {AuthService} from "../../../store/auth-store/services/auth.service";
 export class HeaderComponent implements OnInit {
   data$: Observable<any> = this.store$.pipe(select(authDataSelector))
   isAuth$: Observable<any> = this.store$.pipe(select(isAuthSelector))
+  // token$: Observable<any> = this.store$.pipe(select(authTokenSelector))
+
 
   @Input() toggle: boolean = true;
   @Output() handleClick: any = new EventEmitter<boolean>()

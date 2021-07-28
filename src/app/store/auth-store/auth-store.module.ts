@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {StoreModule} from "@ngrx/store";
 import {authReducer} from "./auth.reducer";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./interseptors/auth.interseptor.interceptor";
 
 export const AUTH_REDUCER = "auth";
 
@@ -11,7 +13,14 @@ const store = {
 @NgModule({
   imports: [
     StoreModule.forRoot(store)],
-  exports: [StoreModule]
+  exports: [StoreModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ]
 })
 
 

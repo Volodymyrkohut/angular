@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {StorageService} from "../../../services/storage.service";
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import {
   authenticatedAction,
   notAuthenticatedAction
 } from "../auth.actions";
+import {authTokenSelector} from "../auth.selectors";
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ import {
 
 
 export class AuthService {
+  // accessToken: string = ''
+
   // public error$: Subject<any> = new Subject<any>()
   //
   AUTH_TOKEN_KEY = 'auth_token'
@@ -26,6 +30,10 @@ export class AuthService {
   };
 
   constructor(private storageService: StorageService, private http: HttpClient, private store$: Store) {
+    // this.store$.pipe(select(authTokenSelector)).subscribe((token) => {
+    //   this.accessToken = token;
+    // })
+
 
     // В випадку якщо є токен в локал сторі повідомляю ngrx store
     if (this.isAuthenticated()) {
@@ -52,6 +60,15 @@ export class AuthService {
   //
   setToken(token: any) {
     this.storageService.setItem(this.AUTH_TOKEN_KEY, token)
+  }
+
+  getTestProfile() {
+    return this.http.get('https://api.dev24.bukovel.net/b24/desktop/account').pipe(
+        tap((response: any) => {
+            console.log("response",response);
+            return response
+        }),
+      ).subscribe();
   }
 
   // handleError(error: HttpErrorResponse) {
